@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <form id="paper" method="get" action="">
+        <h1>Hello, my name is Linda</h1>
+        <h2>bla bla bla</h2>
+        <div id="margin">
+          Title: <input id="title" type="text" name="title" />
+        </div>
+        <textarea
+          placeholder="Ask me anything.."
+          id="text"
+          name="text"
+          rows="4"
+          style="
+            overflow: hidden;
+            word-wrap: break-word;
+            resize: none;
+            height: 160px;
+          "
+        ></textarea>
+        <br />
+        <input id="button" type="submit" value="Go" />
+      </form>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
