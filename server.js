@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const router = require("./routes/phrases.js");
 
-dotenv.config();
+dotenv.config({ path: "C:/github/hackathon2/.env" });
 
 const app = express();
 

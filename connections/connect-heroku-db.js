@@ -1,7 +1,7 @@
 const knex = require("knex");
 const dotenv = require("dotenv");
 
-dotenv.config();
+dotenv.config({ path: "C:/github/hackathon2/.env" });
 
 const db = knex({
   client: "pg",
