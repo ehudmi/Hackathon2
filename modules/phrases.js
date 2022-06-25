@@ -1,10 +1,9 @@
 const db = require("../connections/connect-heroku-db.js");
 
-// const _searchProduct = (q) => {
-//     return db("products")
-//       .select("id", "name", "price")
-//       .whereILike("name", `${q}%`);
-//   };
+const _askQuestion = (ques) => {
+  console.log(ques);
+  return db("goodfit_tab").select("answer").where({ question: ques });
+};
 
 // module.exports = {
 //     _getAllProduct,
@@ -14,4 +13,4 @@ const db = require("../connections/connect-heroku-db.js");
 //     _updateProduct,
 //     _deleteProduct,
 //   };
-module.exports = {};
+module.exports = { _askQuestion };
