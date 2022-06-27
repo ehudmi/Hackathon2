@@ -12,12 +12,4 @@ const _boxAnswer = (type) => {
     .orWhere({ type: "general" });
 };
 
-// module.exports = {
-//     _getAllProduct,
-//     _getProduct,
-//     _searchProduct,
-//     _createProduct,
-//     _updateProduct,
-//     _deleteProduct,
-//   };
 module.exports = { _askQuestion, _boxAnswer };
