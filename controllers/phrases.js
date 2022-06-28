@@ -2,35 +2,24 @@ const { _askQuestion, _boxAnswer } = require("../modules/phrases.js");
 const casual = require("casual");
 const bodyParser = require("body-parser");
 
+// Global variables that I think I need
 let wordArray = [];
 let replyArray = [];
 let currentBoxAnswer;
 let finalAnswer;
 
-const whFun = async (type) => {
-  await boxAnswer(type);
-  secondWord(wordArray[1]);
-  if (currentBoxAnswer.type == "general") {
-    finalAnswer = currentBoxAnswer.response;
-    console.log(finalAnswer);
-    return finalAnswer;
-  } else {
-    finalAnswer = `${replyArray.join(" ")} ${currentBoxAnswer.response}`;
-    console.log(finalAnswer);
-    return finalAnswer;
-  }
-};
-
+// if there is no goodfit answer
 const splitSentence = (sent) => {
   wordArray = sent.split(" ");
   wordArray[wordArray.length - 1] = wordArray[wordArray.length - 1].replace(
     "?",
     ""
   );
-  console.log(wordArray);
+  // console.log(wordArray);
   firstWord(wordArray[0]);
 };
 
+// The examine first word of the question
 const firstWord = (word) => {
   switch (word) {
     case "who":
@@ -54,6 +43,22 @@ const firstWord = (word) => {
   }
 };
 
+// handling of the wh question logic
+const whFun = async (type) => {
+  secondWord(wordArray[1]);
+  await boxAnswer(type);
+  if (currentBoxAnswer.type == "general") {
+    finalAnswer = currentBoxAnswer.response;
+    // console.log(finalAnswer);
+    return finalAnswer;
+  } else {
+    finalAnswer = `${replyArray.join(" ")} ${currentBoxAnswer.response}`;
+    // console.log(finalAnswer);
+    return finalAnswer;
+  }
+};
+
+// examine 2nd word
 const secondWord = (word) => {
   thirdWord(wordArray[2]);
   switch (word) {
@@ -78,6 +83,7 @@ const secondWord = (word) => {
   }
 };
 
+// examine 3rd word
 const thirdWord = (word) => {
   switch (word) {
     case "my":
@@ -100,50 +106,40 @@ const thirdWord = (word) => {
   }
 };
 
+// request a box answer and randomize it
 const boxAnswer = async (type) => {
   try {
     result = await _boxAnswer(type);
     let allAnswers = result;
     let index = Math.floor(Math.abs(Math.random() * (allAnswers.length - 1)));
     currentBoxAnswer = allAnswers[index];
-    console.log(index);
+    // console.log(index);
   } catch (error) {
     console.log(error);
   }
 };
 
-// const boxAnswer = (type) => {
-//   _boxAnswer(type)
-//     .then((result) => {
-//       let allAnswers = result;
-//       let index = Math.floor(Math.abs(Math.random() * (allAnswers.length - 1)));
-//       currentBoxAnswer = allAnswers[index];
-//       console.log(currentBoxAnswer);
-//       // res.json(result);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(404).json({ msg: "not found" });
-//     });
-// };
-
-const askQuestion = (req, res) => {
-  console.log(req.body.text);
-  _askQuestion(req.body.text)
-    .then((result) => {
-      if (result.length > 0) {
-        console.log(result);
-        console.log(result[0].answer);
-        res.send(result[0].answer);
-      } else {
-        console.log("this is foobar");
-        splitSentence(req.body.text);
+const askQuestion = async (req, res) => {
+  console.log(req.body.question);
+  try {
+    let result = await _askQuestion(req.body.question);
+    if (result.length > 0) {
+      console.log(result);
+      console.log(result[0].answer);
+      res.send(result[0].answer);
+    } else {
+      console.log("this is foobar");
+      const res1 = splitSentence(req.body.question);
+      // console.log(res1);
+      if (finalAnswer) {
+        console.log(finalAnswer);
+        res.send(finalAnswer);
       }
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(404).json({ msg: "not found" });
-    });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ msg: "not found" });
+  }
 };
 
 module.exports = { askQuestion };
