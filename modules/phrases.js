@@ -12,4 +12,8 @@ const _boxAnswer = (type) => {
     .orWhere({ type: "general" });
 };
 
-module.exports = { _askQuestion, _boxAnswer };
+const _newGoodFit = (star) => {
+  return db("goodfit_tab").insert(star).returning("*");
+};
+
+module.exports = { _askQuestion, _boxAnswer, _newGoodFit };

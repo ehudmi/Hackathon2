@@ -1,5 +1,5 @@
 const express = require("express");
-const { askQuestion } = require("../controllers/phrases.js");
+const { askQuestion, newGoodFit } = require("../controllers/phrases.js");
 // const {
 // getProducts,
 // getProduct,
@@ -15,6 +15,7 @@ const router = express.Router();
 // router.get("/:id", getProduct);
 // router.get("/", getProducts);
 router.post("/", askQuestion);
+router.put("/api/rating", newGoodFit);
 // router.put("/:id", updateProduct);
 // router.delete("/:id", deleteProduct);
 

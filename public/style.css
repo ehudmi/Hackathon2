@@ -4,10 +4,21 @@
   margin: 0px;
   padding: 0px;
   font-family: Courier, monospace;
+  box-sizing: content-box !important;
 }
 body {
   background: #333
     url(https://static.tumblr.com/maopbtg/a5emgtoju/inflicted.png) repeat;
+}
+.headline {
+  font-size: 50px;
+  margin: 50px auto;
+  text-align: center;
+}
+.subHeadline {
+  font-size: 40px;
+  margin: 50px auto;
+  text-align: center;
 }
 #paper {
   color: #fff;
@@ -24,10 +35,11 @@ body {
 }
 
 #textareaContainer {
-  display: flex;
+  display: block;
 }
 
-#questionText #answerText {
+#questionText,
+#answerText {
   width: 500px;
   overflow: hidden;
   background-color: #fff;
@@ -60,17 +72,6 @@ body {
   height: 28px;
   font-weight: bold;
   width: 220px;
-}
-
-h1 {
-  font-size: 50px;
-  margin: 50px auto;
-}
-
-h2 {
-  font-size: 40px;
-  margin: 30px auto;
-  text-align: center;
 }
 
 #button {

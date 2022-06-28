@@ -1,4 +1,8 @@
-const { _askQuestion, _boxAnswer } = require("../modules/phrases.js");
+const {
+  _askQuestion,
+  _boxAnswer,
+  _newGoodFit,
+} = require("../modules/phrases.js");
 const casual = require("casual");
 const bodyParser = require("body-parser");
 
@@ -126,7 +130,7 @@ const askQuestion = async (req, res) => {
     if (result.length > 0) {
       console.log(result);
       console.log(result[0].answer);
-      res.send(result[0].answer);
+      res.send(result[0].answer + "9");
     } else {
       console.log("this is foobar");
       const res1 = splitSentence(req.body.question);
@@ -142,4 +146,16 @@ const askQuestion = async (req, res) => {
   }
 };
 
-module.exports = { askQuestion };
+const newGoodFit = async (req, res) => {
+  console.log(req.body);
+  try {
+    let result = await _newGoodFit(req.body);
+    console.log(result);
+    res.send("thank you for your feedback");
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ msg: "I failed" });
+  }
+};
+
+module.exports = { askQuestion, newGoodFit };
