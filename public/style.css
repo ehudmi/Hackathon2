@@ -171,3 +171,7 @@ label.star:before {
 
   font-family: FontAwesome;
 }
+
+#paragraphFeedback {
+  color: white;
+}

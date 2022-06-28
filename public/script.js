@@ -1,7 +1,3 @@
-// $(document).ready(function () {
-//   $("#title").focus();
-//   $("#text").autosize();
-// });
 const userQuestion = document.forms[0];
 let found = false;
 userQuestion.addEventListener("submit", async (e) => {
@@ -32,33 +28,43 @@ userQuestion.addEventListener("submit", async (e) => {
   console.log(text);
   let answer = document.createTextNode(text);
   document.querySelector("#answerText").appendChild(answer);
-  // let userQuestion = document.querySelector("#questionText").value;
-  // console.log(userQuestion);
-  // document.querySelector("#questionText").value = userQuestion.concat(
-  //   " ",
-  //   `\n\n${text}`
-  // );
 
   document.querySelector(".rate").style.visibility = "visible";
   document.querySelector("#star-5").addEventListener("click", rating);
 });
 
+// to fix //
 const rating = async () => {
+  while (document.querySelector("#paragraphFeedback").firstChild) {
+    document
+      .querySelector("#paragraphFeedback")
+      .removeChild(document.querySelector("#paragraphFeedback").firstChild);
+  }
   if (found == false) {
     let questionData = document.querySelector("#questionText").value;
     let answerData = document.querySelector("#answerText").value;
     let starRating = 85;
-    const response = await fetch("http://localhost:5004/api/rating", {
-      method: "POST",
+    const response = await fetch("http://localhost:5004/api/phrases", {
+      method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: `{ "question": "${questionData}",
-    "answer": "${answerData}" ,
-    "fit": "${starRating}" }`,
+      "answer": "${answerData}" ,
+      "fit": "${starRating}" }`,
     });
+    let feedback = await response.text();
+    let paragraph = document.createElement("p");
+    paragraph.setAttribute("id", "paragraphFeedback");
+    let feedbackText = document.createTextNode(feedback);
+    document.querySelector(".stars").appendChild(paragraph);
+    paragraph.appendChild(feedbackText);
   } else {
-    console.log("we have it already");
+    let paragraph = document.createElement("p");
+    paragraph.setAttribute("id", "paragraphFeedback");
+    let feedbackText = document.createTextNode("Thank you, we have it already");
+    document.querySelector(".stars").appendChild(paragraph);
+    paragraph.appendChild(feedbackText);
   }
 };
