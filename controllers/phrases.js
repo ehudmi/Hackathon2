@@ -147,15 +147,15 @@ const askQuestion = async (req, res) => {
 };
 
 const newGoodFit = async (req, res) => {
-  console.log(req.body);
-  try {
-    let result = await _newGoodFit(req.body);
-    console.log(result);
-    res.send("thank you for your feedback");
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({ msg: "I failed" });
-  }
+  console.log(req);
+  // try {
+  //   let result = await _newGoodFit(req.body);
+  //   console.log(result);
+  //   res.send("thank you for your feedback");
+  // } catch (error) {
+  //   console.log(error);
+  //   res.status(404).json({ msg: "I failed" });
+  // }
 };
 
 module.exports = { askQuestion, newGoodFit };

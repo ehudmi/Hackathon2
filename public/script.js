@@ -23,8 +23,11 @@ userQuestion.addEventListener("submit", async (e) => {
   }
   let text = await response.text();
   if (text.charAt(text.length - 1) == "9") {
+    console.log(text);
     found = true;
     text = text.slice(0, text.length - 1);
+  } else {
+    found = false;
   }
   console.log(text);
   let answer = document.createTextNode(text);
@@ -37,6 +40,7 @@ userQuestion.addEventListener("submit", async (e) => {
   // );
 
   document.querySelector(".rate").style.visibility = "visible";
+  document.querySelector("#star-5").addEventListener("click", rating);
 });
 
 const rating = async () => {
@@ -51,9 +55,10 @@ const rating = async () => {
         "Content-Type": "application/json",
       },
       body: `{ "question": "${questionData}",
-    "answer": "${answerData}" 
+    "answer": "${answerData}" ,
     "fit": "${starRating}" }`,
     });
+  } else {
+    console.log("we have it already");
   }
 };
-// document.querySelector("#star-5").addEventListener("click", rating);

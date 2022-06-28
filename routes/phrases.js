@@ -15,7 +15,7 @@ const router = express.Router();
 // router.get("/:id", getProduct);
 // router.get("/", getProducts);
 router.post("/", askQuestion);
-router.put("/api/rating", newGoodFit);
+router.put("/", newGoodFit);
 // router.put("/:id", updateProduct);
 // router.delete("/:id", deleteProduct);
 
