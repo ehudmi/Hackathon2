@@ -1,7 +1,6 @@
 const db = require("../connections/connect-heroku-db.js");
 
 const _askQuestion = (ques) => {
-  console.log(ques);
   return db("goodfit_tab").select("answer").where({ question: ques });
 };
 

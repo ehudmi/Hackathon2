@@ -12,7 +12,6 @@ app.listen(process.env.PORT || 8080, () => {
   console.log(`server is running on port ${process.env.PORT || 8080}`);
 });
 
-console.log(__dirname);
 app.use("/", express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

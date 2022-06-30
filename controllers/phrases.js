@@ -19,7 +19,6 @@ const splitSentence = (sent) => {
     "?",
     ""
   );
-  // console.log(wordArray);
   firstWord(wordArray[0]);
 };
 
@@ -53,11 +52,9 @@ const whFun = async (type) => {
   await boxAnswer(type);
   if (currentBoxAnswer.type == "general") {
     finalAnswer = currentBoxAnswer.response;
-    // console.log(finalAnswer);
     return finalAnswer;
   } else {
     finalAnswer = `${replyArray.join(" ")} ${currentBoxAnswer.response}`;
-    // console.log(finalAnswer);
     return finalAnswer;
   }
 };
@@ -67,22 +64,17 @@ const secondWord = (word) => {
   thirdWord(wordArray[2]);
   switch (word) {
     case "is":
-      // thirdWord(wordArray[2]);
       replyArray.push("is");
       break;
     case "are":
-      // thirdWord(wordArray[2]);
       replyArray.push("are");
       break;
     case "do":
-      // thirdWord(wordArray[2]);
       break;
     case "am":
-      // thirdWord(wordArray[2]);
       replyArray.push("are");
       break;
     default:
-      // thirdWord(wordArray[2]);
       replyArray.splice(1, word);
   }
 };
@@ -117,26 +109,19 @@ const boxAnswer = async (type) => {
     let allAnswers = result;
     let index = Math.floor(Math.abs(Math.random() * (allAnswers.length - 1)));
     currentBoxAnswer = allAnswers[index];
-    // console.log(index);
   } catch (error) {
     console.log(error);
   }
 };
 
 const askQuestion = async (req, res) => {
-  console.log(req.body.question);
   try {
     let result = await _askQuestion(req.body.question);
     if (result.length > 0) {
-      console.log(result);
-      console.log(result[0].answer);
       res.send(result[0].answer + "9");
     } else {
-      console.log("this is foobar");
       const res1 = splitSentence(req.body.question);
-      // console.log(res1);
       if (finalAnswer) {
-        console.log(finalAnswer);
         res.send(finalAnswer);
       }
     }
@@ -147,10 +132,8 @@ const askQuestion = async (req, res) => {
 };
 
 const newGoodFit = async (req, res) => {
-  console.log(req.body);
   try {
     let result = await _newGoodFit(req.body);
-    console.log(result);
     res.send("Thank you for your feedback");
   } catch (error) {
     console.log(error);

@@ -16,7 +16,7 @@ body {
   text-align: center;
 }
 .subHeadline {
-  font-size: 40px;
+  font-size: 35px;
   margin: 50px auto;
   text-align: center;
 }
@@ -172,6 +172,6 @@ label.star:before {
   font-family: FontAwesome;
 }
 
-#paragraphFeedback {
+.feedbackText {
   color: white;
 }
