@@ -4,7 +4,6 @@ const {
   _newGoodFit,
 } = require("../modules/phrases.js");
 const casual = require("casual");
-const bodyParser = require("body-parser");
 
 // Global variables that I think I need
 let wordArray = [];
@@ -22,7 +21,7 @@ const splitSentence = (sent) => {
   firstWord(wordArray[0]);
 };
 
-// The examine first word of the question
+// Examine the first word of the question
 const firstWord = (word) => {
   switch (word) {
     case "who":
@@ -50,12 +49,37 @@ const firstWord = (word) => {
 const whFun = async (type) => {
   secondWord(wordArray[1]);
   await boxAnswer(type);
-  if (currentBoxAnswer.type == "general") {
-    finalAnswer = currentBoxAnswer.response;
-    return finalAnswer;
+  const assessBoxAnswer = () => {
+    if (currentBoxAnswer.type == "general") {
+      finalAnswer = currentBoxAnswer.response;
+      return finalAnswer;
+    } else {
+      finalAnswer = `${replyArray.join(" ")} ${currentBoxAnswer.response}`;
+      return finalAnswer;
+    }
+  };
+  let flip = casual.integer((from = 1), (to = 4));
+  if (flip > 1) {
+    assessBoxAnswer();
   } else {
-    finalAnswer = `${replyArray.join(" ")} ${currentBoxAnswer.response}`;
-    return finalAnswer;
+    switch (type) {
+      case "who":
+        finalAnswer = `${replyArray.join(" ")} ${casual.full_name}`;
+        break;
+      case "where":
+        finalAnswer = `${replyArray.join(" ")} in ${casual.city}, ${
+          casual.country
+        }`;
+        break;
+      case "when":
+        finalAnswer = `${replyArray.join(" ")} on ${casual.month_name} ${
+          casual.day_of_month
+        }, ${casual.year}`;
+        break;
+      default:
+        assessBoxAnswer();
+        break;
+    }
   }
 };
 
@@ -107,13 +131,14 @@ const boxAnswer = async (type) => {
   try {
     result = await _boxAnswer(type);
     let allAnswers = result;
-    let index = Math.floor(Math.abs(Math.random() * (allAnswers.length - 1)));
+    let index = casual.integer((from = 0), (to = allAnswers.length - 1));
     currentBoxAnswer = allAnswers[index];
   } catch (error) {
     console.log(error);
   }
 };
 
+// receive the question and check to see if there is a goodfit answer - if not start the logic
 const askQuestion = async (req, res) => {
   try {
     let result = await _askQuestion(req.body.question);
@@ -131,6 +156,7 @@ const askQuestion = async (req, res) => {
   }
 };
 
+// receive the high rating from the user and add answer to goodfit table
 const newGoodFit = async (req, res) => {
   try {
     let result = await _newGoodFit(req.body);
