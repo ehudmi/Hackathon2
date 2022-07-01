@@ -27,14 +27,17 @@ userQuestion.addEventListener("submit", async (e) => {
     } else {
       questionData = questionData.concat("", "?");
     }
-    const response = await fetch("http://localhost:5004/api/phrases", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: `{ "question": "${questionData}" }`,
-    });
+    const response = await fetch(
+      "https://linda-ai-new.herokuapp.com/api/phrases",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: `{ "question": "${questionData}" }`,
+      }
+    );
     deleteInfo("#answerText");
     let text = await response.text();
     if (text.charAt(text.length - 1) == "9") {
@@ -56,16 +59,19 @@ const rating = async () => {
     let questionData = document.querySelector("#questionText").value;
     let answerData = document.querySelector("#answerText").value;
     let starRating = 85;
-    const response = await fetch("http://localhost:5004/api/phrases", {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: `{ "question": "${questionData}",
+    const response = await fetch(
+      "https://linda-ai-new.herokuapp.com/api/phrases",
+      {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: `{ "question": "${questionData}",
       "answer": "${answerData}" ,
       "fit": "${starRating}" }`,
-    });
+      }
+    );
     let feedback = await response.text();
     appendInfo(".feedbackText", feedback);
   } else {
