@@ -17,6 +17,9 @@ const appendInfo = (loc, elem) => {
 userQuestion.addEventListener("submit", async (e) => {
   e.preventDefault();
   let questionData = document.querySelector("#questionText").value;
+  questionData =
+    questionData.substring(0, 1).toLowerCase() + questionData.substring(1);
+  console.log(questionData);
   if (questionData.search("wh") !== 0 && questionData.search("how") !== 0) {
     alert(
       "please submit a WH question (who, why, what, where, when or how)..."
