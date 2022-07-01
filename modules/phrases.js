@@ -1,4 +1,4 @@
-const db = require("../connections/connect-heroku-db.js");
+const db = require("../connections/linda-heroku-db");
 
 const _askQuestion = (ques) => {
   return db("goodfit_tab").select("answer").where({ question: ques });
