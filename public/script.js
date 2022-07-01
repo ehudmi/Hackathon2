@@ -27,7 +27,7 @@ userQuestion.addEventListener("submit", async (e) => {
     } else {
       questionData = questionData.concat("", "?");
     }
-    const response = await fetch("http://localhost:5004/api/phrases", {
+    const response = await fetch("/api/phrases", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -56,7 +56,7 @@ const rating = async () => {
     let questionData = document.querySelector("#questionText").value;
     let answerData = document.querySelector("#answerText").value;
     let starRating = 85;
-    const response = await fetch("http://localhost:5004/api/phrases", {
+    const response = await fetch("/api/phrases", {
       method: "PUT",
       headers: {
         Accept: "application/json",
