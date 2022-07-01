@@ -159,9 +159,3 @@ label.star:before {
 .feedbackText {
   color: white;
 }
-
-.resetStar:before {
-  color: #4a148c !important;
-  content: "\f006" !important;
-}
-
