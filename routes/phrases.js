@@ -14,8 +14,8 @@ const router = express.Router();
 // router.get("/search", searchProduct);
 // router.get("/:id", getProduct);
 // router.get("/", getProducts);
-router.post("/", askQuestion);
-router.put("/", newGoodFit);
+router.post("/api/phrases", askQuestion);
+router.put("/api/phrases", newGoodFit);
 // router.put("/:id", updateProduct);
 // router.delete("/:id", deleteProduct);
 
