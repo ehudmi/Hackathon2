@@ -1,4 +1,4 @@
-const userQuestion = document.forms[0];
+let questionData = "";
 let found = false;
 
 const deleteInfo = (elem) => {
@@ -14,9 +14,9 @@ const appendInfo = (loc, elem) => {
 };
 
 // Submit question
-userQuestion.addEventListener("submit", async (e) => {
+document.forms[0].addEventListener("submit", async (e) => {
   e.preventDefault();
-  let questionData = document.querySelector("#questionText").value;
+  questionData = document.querySelector("#questionText").value;
   questionData =
     questionData.substring(0, 1).toLowerCase() + questionData.substring(1);
   console.log(questionData);
@@ -56,7 +56,7 @@ userQuestion.addEventListener("submit", async (e) => {
 // Submit rating
 const rating = async () => {
   if (found == false) {
-    let questionData = document.querySelector("#questionText").value;
+    questionData = document.querySelector("#questionText").value;
     let answerData = document.querySelector("#answerText").value;
     let starRating = 85;
     const response = await fetch("/api/phrases", {
@@ -81,6 +81,7 @@ const rating = async () => {
       deleteInfo(".feedbackText");
       deleteInfo("#answerText");
       document.querySelector("#questionText").value = "";
+      questionData = "";
     }, 4000);
   };
   feedbackTime();
@@ -106,6 +107,7 @@ starArray.forEach((elem) => {
         deleteInfo(".feedbackText");
         deleteInfo("#answerText");
         document.querySelector("#questionText").value = "";
+        questionData = "";
         document.querySelector(".rate").style.visibility = "hidden";
       }
     }, 4000);
