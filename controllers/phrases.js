@@ -160,7 +160,7 @@ const askQuestion = async (req, res) => {
 const newGoodFit = async (req, res) => {
   try {
     let result = await _newGoodFit(req.body);
-    res.send("Thank you for your feedback");
+    res.send("Glad you approve - you know what - I'll write this down");
   } catch (error) {
     console.log(error);
     res.status(404).json({ msg: "I failed" });

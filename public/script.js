@@ -72,7 +72,7 @@ const rating = async () => {
     let feedback = await response.text();
     appendInfo(".feedbackText", feedback);
   } else {
-    appendInfo(".feedbackText", "Thank you, we have it already");
+    appendInfo(".feedbackText", "Ok kiddo - I knew that already!");
   }
   const feedbackTime = () => {
     setTimeout(() => {
@@ -102,8 +102,10 @@ starArray.forEach((elem) => {
       if (document.querySelector(elem).checked) {
         document.querySelector(elem).checked = false;
         deleteInfo(".feedbackText");
+        deleteInfo("#questionText");
+        deleteInfo("#answerText");
         document.querySelector(".rate").style.visibility = "hidden";
       }
-    }, 2500);
+    }, 4000);
   });
 });
