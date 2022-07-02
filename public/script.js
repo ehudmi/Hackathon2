@@ -79,9 +79,9 @@ const rating = async () => {
       document.querySelector(".rate").style.visibility = "hidden";
       document.querySelector("input.star-5").checked = false;
       deleteInfo(".feedbackText");
-      deleteInfo("#questionText");
       deleteInfo("#answerText");
-    }, 2500);
+      document.querySelector("#questionText").value = "";
+    }, 4000);
   };
   feedbackTime();
 };
@@ -104,8 +104,8 @@ starArray.forEach((elem) => {
       if (document.querySelector(elem).checked) {
         document.querySelector(elem).checked = false;
         deleteInfo(".feedbackText");
-        deleteInfo("#questionText");
         deleteInfo("#answerText");
+        document.querySelector("#questionText").value = "";
         document.querySelector(".rate").style.visibility = "hidden";
       }
     }, 4000);
