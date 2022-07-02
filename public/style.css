@@ -156,7 +156,8 @@ label.star:before {
   font-family: FontAwesome;
 }
 
-.feedbackText {
+.feedbackText,
+.feedbackTitle {
   color: white;
   font-size: 20px;
 }

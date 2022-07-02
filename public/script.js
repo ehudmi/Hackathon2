@@ -79,6 +79,8 @@ const rating = async () => {
       document.querySelector(".rate").style.visibility = "hidden";
       document.querySelector("input.star-5").checked = false;
       deleteInfo(".feedbackText");
+      deleteInfo("#questionText");
+      deleteInfo("#answerText");
     }, 2500);
   };
   feedbackTime();
